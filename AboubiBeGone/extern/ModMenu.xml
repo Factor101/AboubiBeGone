@@ -1,0 +1,322 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ModMenu</name>
+    </assembly>
+    <members>
+        <member name="T:ModMenu.Behaviours.OptionList.ValueControllers.BoxedValueController">
+            <summary>
+            An option list item that interacts with a boxed "value" via a getter and setter
+            </summary>
+        </member>
+        <member name="T:ModMenu.Behaviours.OptionList.ValueControllers.ValueController`1">
+            <summary>
+            Provides typed versions of a <see cref="T:ModMenu.Behaviours.OptionList.ValueControllers.BoxedValueController"/>'s getter and setter
+            </summary>
+        </member>
+        <member name="M:ModMenu.Api.ModMenuCustomisation.RegisterContentBuilder(System.Action{ModMenu.Api.OptionListContext})">
+            <summary>
+            Registers a content builder that will be run while ModMenu is generating the option list
+            for the current plugin's config file
+            </summary>
+        </member>
+        <member name="M:ModMenu.Api.ModMenuCustomisation.HideEntry(BepInEx.Configuration.ConfigEntryBase)">
+            <summary>Prevents ModMenu from generating a config item for the specified <see cref="T:BepInEx.Configuration.ConfigEntryBase"/></summary>
+            <param name="entry">The entry to hide</param>
+        </member>
+        <member name="M:ModMenu.Api.ModMenuCustomisation.HideEntries(System.Collections.Generic.IEnumerable{BepInEx.Configuration.ConfigEntryBase})">
+            <summary>Prevents ModMenu from generating a config item for the specified <see cref="T:BepInEx.Configuration.ConfigEntryBase"/>s</summary>
+            <param name="entries">An enumerable of entries to hide</param>
+        </member>
+        <member name="M:ModMenu.Api.ModMenuCustomisation.SetPluginIcon(UnityEngine.Sprite)">
+            <summary>Sets the icon of the current plugin, overriding any detected thunderstore metadata</summary>
+            <param name="icon">The sprite to use for the plugin icon</param>
+        </member>
+        <member name="M:ModMenu.Api.ModMenuCustomisation.SetPluginDescription(System.String)">
+            <summary>Sets the description of the current plugin, overriding any detected thunderstore metadata</summary>
+            <param name="description">The description to use</param>
+        </member>
+        <member name="P:ModMenu.Api.OptionListContext.Root">
+            <summary>The root transform of the option list</summary>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.AppendHeader(System.String)">
+            <summary>Appends a section header to the option list</summary>
+            <param name="text">Text to display in the header</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.PrependHeader(System.String)">
+            <summary>Prepends a section header to the option list</summary>
+            <param name="text">Text to display in the header</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.InsertHeader(System.Int32,System.String)">
+            <summary>Inserts a section header into the option list, at the specified position</summary>
+            <param name="position">The index of the option list at which the header will be inserted</param>
+            <param name="text">Text to display in the header</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.AppendTextBox(System.String)">
+            <summary>Appends a text box to the option list</summary>
+            <param name="text">Text to display in the text box</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.PrependTextBox(System.String)">
+            <summary>Prepends a text box to the option list</summary>
+            <param name="text">Text to display in the text box</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.InsertTextBox(System.Int32,System.String)">
+            <summary>Inserts a text box into the option list, at the specified position</summary>
+            <param name="position">The index of the option list at which the text box will be inserted</param>
+            <param name="text">Text to display in the text box</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.AppendButton(System.String,System.String,System.Action)">
+            <summary>Appends a button to the option list</summary>
+            <param name="nameText">Text to display next to the button. The button will fill the line if this is empty.</param>
+            <param name="onClick">An action that will be invoked when the button is clicked</param>
+            <param name="buttonText">Text to display on the button</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.PrependButton(System.String,System.String,System.Action)">
+            <summary>Prepends a button to the option list</summary>
+            <param name="nameText">The text to display next to the button. The button will fill the line if this is empty.</param>
+            <param name="onClick">An action that will be invoked when the button is clicked</param>
+            <param name="buttonText">The text to display on the button</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.InsertButton(System.Int32,System.String,System.String,System.Action)">
+            <summary>Inserts a button into the option list, at the specified position</summary>
+            <param name="position">The index of the option list at which the button will be inserted</param>
+            <param name="nameText">The text to display next to the button. The button will fill the line if this is empty.</param>
+            <param name="onClick">An action that will be invoked when the button is clicked</param>
+            <param name="buttonText">The text to display on the button</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.AppendCheckbox(System.String,System.Func{System.Boolean},System.Action{System.Boolean})">
+            <summary>Appends a checkbox to the option list</summary>
+            <param name="nameText">Text to display next to the checkbox</param>
+            <param name="getter">A Func returning the value that the checkbox should display</param>
+            <param name="setter">An Action that is invoked when the checkbox is checked</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.PrependCheckbox(System.String,System.Func{System.Boolean},System.Action{System.Boolean})">
+            <summary>Prepends a checkbox to the option list</summary>
+            <param name="nameText">Text to display next to the checkbox</param>
+            <param name="getter">A Func returning the value that the checkbox should display</param>
+            <param name="setter">An Action that is invoked when the checkbox is checked</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.InsertCheckbox(System.Int32,System.String,System.Func{System.Boolean},System.Action{System.Boolean})">
+            <summary>Inserts a checkbox into the option list, at the specified position</summary>
+            <param name="position">The index of the option list at which the checkbox will be inserted</param>
+            <param name="nameText">Text to display next to the checkbox</param>
+            <param name="getter">A Func returning the value that the checkbox should display</param>
+            <param name="setter">An Action that is invoked when the checkbox is checked</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.AppendStringInput(System.String,System.Func{System.String},System.Action{System.String})">
+            <summary>Appends a string input field to the option list</summary>
+            <param name="nameText">Text to display next to the input field</param>
+            <param name="getter">A Func returning the value that the input field should display</param>
+            <param name="setter">An Action that is invoked when a user finishes editing the text in the input field</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.PrependStringInput(System.String,System.Func{System.String},System.Action{System.String})">
+            <summary>Prepends a string input field to the option list</summary>
+            <param name="nameText">Text to display next to the input field</param>
+            <param name="getter">A Func returning the value that the input field should display</param>
+            <param name="setter">An Action that is invoked when a user finishes editing the text in the input field</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.InsertStringInput(System.Int32,System.String,System.Func{System.String},System.Action{System.String})">
+            <summary>Inserts a string input field into the option list, at the specified position</summary>
+            <param name="position">The index of the option list at which the input field will be inserted</param>
+            <param name="nameText">Text to display next to the input field</param>
+            <param name="getter">A Func returning the value that the input field should display</param>
+            <param name="setter">An Action that is invoked when a user finishes editing the text in the input field</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.AppendColorInput(System.String,System.Func{UnityEngine.Color},System.Action{UnityEngine.Color})">
+            <summary>Appends a <see cref="T:UnityEngine.Color"/> input field to the option list</summary>
+            <param name="nameText">Text to display next to the input field</param>
+            <param name="getter">A Func returning the value that the input field should display</param>
+            <param name="setter">An Action that is invoked when a user finishes editing the text in the input field</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.PrependColorInput(System.String,System.Func{UnityEngine.Color},System.Action{UnityEngine.Color})">
+            <summary>Prepends a <see cref="T:UnityEngine.Color"/> input field to the option list</summary>
+            <param name="nameText">Text to display next to the input field</param>
+            <param name="getter">A Func returning the value that the input field should display</param>
+            <param name="setter">An Action that is invoked when a user finishes editing the text in the input field</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.InsertColorInput(System.Int32,System.String,System.Func{UnityEngine.Color},System.Action{UnityEngine.Color})">
+            <summary>Inserts a <see cref="T:UnityEngine.Color"/> input field into the option list, at the specified position</summary>
+            <param name="position">The index of the option list at which the input field will be inserted</param>
+            <param name="nameText">Text to display next to the input field</param>
+            <param name="getter">A Func returning the value that the input field should display</param>
+            <param name="setter">An Action that is invoked when a user finishes editing the text in the input field</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.AppendKeyboardShortcutInput(System.String,System.Func{BepInEx.Configuration.KeyboardShortcut},System.Action{BepInEx.Configuration.KeyboardShortcut})">
+            <summary>Appends a <see cref="T:BepInEx.Configuration.KeyboardShortcut"/> binding button to the option list</summary>
+            <param name="nameText">Text to display next to the button</param>
+            <param name="getter">A Func returning the value that the button should display</param>
+            <param name="setter">An Action that is invoked when a user finishes rebinding using the button</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.PrependKeyboardShortcutInput(System.String,System.Func{BepInEx.Configuration.KeyboardShortcut},System.Action{BepInEx.Configuration.KeyboardShortcut})">
+            <summary>Prepends a <see cref="T:BepInEx.Configuration.KeyboardShortcut"/> binding button to the option list</summary>
+            <param name="nameText">Text to display next to the button</param>
+            <param name="getter">A Func returning the value that the button should display</param>
+            <param name="setter">An Action that is invoked when a user finishes rebinding using the button</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.InsertKeyboardShortcutInput(System.Int32,System.String,System.Func{BepInEx.Configuration.KeyboardShortcut},System.Action{BepInEx.Configuration.KeyboardShortcut})">
+            <summary>Inserts a <see cref="T:BepInEx.Configuration.KeyboardShortcut"/> binding button into the option list, at the specified position</summary>
+            <param name="position">The index of the option list at which the button will be inserted</param>
+            <param name="nameText">Text to display next to the button</param>
+            <param name="getter">A Func returning the value that the button should display</param>
+            <param name="setter">An Action that is invoked when a user finishes rebinding using the button</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.AppendKeyCodeInput(System.String,System.Func{UnityEngine.KeyCode},System.Action{UnityEngine.KeyCode})">
+            <summary>Appends a <see cref="T:UnityEngine.KeyCode"/> binding button to the option list</summary>
+            <param name="nameText">Text to display next to the button</param>
+            <param name="getter">A Func returning the value that the button should display</param>
+            <param name="setter">An Action that is invoked when a user finishes rebinding a key using the button</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.PrependKeyCodeInput(System.String,System.Func{UnityEngine.KeyCode},System.Action{UnityEngine.KeyCode})">
+            <summary>Prepends a <see cref="T:UnityEngine.KeyCode"/> binding button to the option list</summary>
+            <param name="nameText">Text to display next to the button</param>
+            <param name="getter">A Func returning the value that the button should display</param>
+            <param name="setter">An Action that is invoked when a user finishes rebinding a key using the button</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.InsertKeyCodeInput(System.Int32,System.String,System.Func{UnityEngine.KeyCode},System.Action{UnityEngine.KeyCode})">
+            <summary>Inserts a <see cref="T:UnityEngine.KeyCode"/> binding button into the option list, at the specified position</summary>
+            <param name="position">The index of the option list at which the button will be inserted</param>
+            <param name="nameText">Text to display next to the button</param>
+            <param name="getter">A Func returning the value that the button should display</param>
+            <param name="setter">An Action that is invoked when a user finishes rebinding using the button</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.AppendQuaternionInput(System.String,System.Func{UnityEngine.Quaternion},System.Action{UnityEngine.Quaternion})">
+            <summary>Appends a <see cref="T:UnityEngine.Quaternion"/> input field to the option list</summary>
+            <param name="nameText">Text to display next to the input field</param>
+            <param name="getter">A Func returning the value that the input field should display</param>
+            <param name="setter">An Action that is invoked when a user finishes editing the text in the input field</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.PrependQuaternionInput(System.String,System.Func{UnityEngine.Quaternion},System.Action{UnityEngine.Quaternion})">
+            <summary>Prepends a <see cref="T:UnityEngine.Quaternion"/> input field to the option list</summary>
+            <param name="nameText">Text to display next to the input field</param>
+            <param name="getter">A Func returning the value that the input field should display</param>
+            <param name="setter">An Action that is invoked when a user finishes editing the text in the input field</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.InsertQuaternionInput(System.Int32,System.String,System.Func{UnityEngine.Quaternion},System.Action{UnityEngine.Quaternion})">
+            <summary>Inserts a <see cref="T:UnityEngine.Quaternion"/> input field into the option list, at the specified position</summary>
+            <param name="position">The index of the option list at which the input field will be inserted</param>
+            <param name="nameText">Text to display next to the input field</param>
+            <param name="getter">A Func returning the value that the input field should display</param>
+            <param name="setter">An Action that is invoked when a user finishes editing the text in the input field</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.AppendVector2Input(System.String,System.Func{UnityEngine.Vector2},System.Action{UnityEngine.Vector2})">
+            <summary>Appends a <see cref="T:UnityEngine.Vector2"/> input field to the option list</summary>
+            <param name="nameText">Text to display next to the input field</param>
+            <param name="getter">A Func returning the value that the input field should display</param>
+            <param name="setter">An Action that is invoked when a user finishes editing the text in the input field</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.PrependVector2Input(System.String,System.Func{UnityEngine.Vector2},System.Action{UnityEngine.Vector2})">
+            <summary>Prepends a <see cref="T:UnityEngine.Vector2"/> input field to the option list</summary>
+            <param name="nameText">Text to display next to the input field</param>
+            <param name="getter">A Func returning the value that the input field should display</param>
+            <param name="setter">An Action that is invoked when a user finishes editing the text in the input field</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.InsertVector2Input(System.Int32,System.String,System.Func{UnityEngine.Vector2},System.Action{UnityEngine.Vector2})">
+            <summary>Inserts a <see cref="T:UnityEngine.Vector2"/> input field into the option list, at the specified position</summary>
+            <param name="position">The index of the option list at which the input field will be inserted</param>
+            <param name="nameText">Text to display next to the input field</param>
+            <param name="getter">A Func returning the value that the input field should display</param>
+            <param name="setter">An Action that is invoked when a user finishes editing the text in the input field</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.AppendVector3Input(System.String,System.Func{UnityEngine.Vector3},System.Action{UnityEngine.Vector3})">
+            <summary>Appends a <see cref="T:UnityEngine.Vector3"/> input field to the option list</summary>
+            <param name="nameText">Text to display next to the input field</param>
+            <param name="getter">A Func returning the value that the input field should display</param>
+            <param name="setter">An Action that is invoked when a user finishes editing the text in the input field</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.PrependVector3Input(System.String,System.Func{UnityEngine.Vector3},System.Action{UnityEngine.Vector3})">
+            <summary>Prepends a <see cref="T:UnityEngine.Vector3"/> input field to the option list</summary>
+            <param name="nameText">Text to display next to the input field</param>
+            <param name="getter">A Func returning the value that the input field should display</param>
+            <param name="setter">An Action that is invoked when a user finishes editing the text in the input field</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.InsertVector3Input(System.Int32,System.String,System.Func{UnityEngine.Vector3},System.Action{UnityEngine.Vector3})">
+            <summary>Inserts a <see cref="T:UnityEngine.Vector3"/> input field into the option list, at the specified position</summary>
+            <param name="position">The index of the option list at which the input field will be inserted</param>
+            <param name="nameText">Text to display next to the input field</param>
+            <param name="getter">A Func returning the value that the input field should display</param>
+            <param name="setter">An Action that is invoked when a user finishes editing the text in the input field</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.AppendVector4Input(System.String,System.Func{UnityEngine.Vector4},System.Action{UnityEngine.Vector4})">
+            <summary>Appends a <see cref="T:UnityEngine.Vector4"/> input field to the option list</summary>
+            <param name="nameText">Text to display next to the input field</param>
+            <param name="getter">A Func returning the value that the input field should display</param>
+            <param name="setter">An Action that is invoked when a user finishes editing the text in the input field</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.PrependVector4Input(System.String,System.Func{UnityEngine.Vector4},System.Action{UnityEngine.Vector4})">
+            <summary>Prepends a <see cref="T:UnityEngine.Vector4"/> input field to the option list</summary>
+            <param name="nameText">Text to display next to the input field</param>
+            <param name="getter">A Func returning the value that the input field should display</param>
+            <param name="setter">An Action that is invoked when a user finishes editing the text in the input field</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.InsertVector4Input(System.Int32,System.String,System.Func{UnityEngine.Vector4},System.Action{UnityEngine.Vector4})">
+            <summary>Inserts a <see cref="T:UnityEngine.Vector4"/> input field into the option list, at the specified position</summary>
+            <param name="position">The index of the option list at which the input field will be inserted</param>
+            <param name="nameText">Text to display next to the input field</param>
+            <param name="getter">A Func returning the value that the input field should display</param>
+            <param name="setter">An Action that is invoked when a user finishes editing the text in the input field</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.AppendDropdown``1(System.String,System.Func{``0},System.Action{``0})">
+            <summary>Appends a dropdown representing an enum to the option list</summary>
+            <param name="nameText">Text to display next to the dropdown</param>
+            <param name="getter">A Func returning the value that the dropdown should display</param>
+            <param name="setter">An Action that is invoked when a user selects an item from the dropdown</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.PrependDropdown``1(System.String,System.Func{``0},System.Action{``0})">
+            <summary>Prepends a dropdown representing an enum to the option list</summary>
+            <param name="nameText">Text to display next to the dropdown</param>
+            <param name="getter">A Func returning the value that the dropdown should display</param>
+            <param name="setter">An Action that is invoked when a user selects an item from the dropdown</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.InsertDropdown``1(System.Int32,System.String,System.Func{``0},System.Action{``0})">
+            <summary>Inserts a dropdown representing an enum into the option list, at the specified position</summary>
+            <param name="position">The index of the option list at which the dropdown will be inserted</param>
+            <param name="nameText">Text to display next to the dropdown</param>
+            <param name="getter">A Func returning the value that the dropdown should display</param>
+            <param name="setter">An Action that is invoked when a user selects an item from the dropdown</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.AppendNumericInputField``1(System.String,System.Func{``0},System.Action{``0})">
+            <summary>Appends an input field supporting any numeric type to the option list</summary>
+            <param name="nameText">Text to display next to the input field</param>
+            <param name="getter">A Func returning the value that the input field should display</param>
+            <param name="setter">An Action that is invoked when a user finishes editing the text in the input field</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.PrependNumericInputField``1(System.String,System.Func{``0},System.Action{``0})">
+            <summary>Prepends an input field supporting any numeric type to the option list</summary>
+            <param name="nameText">Text to display next to the input field</param>
+            <param name="getter">A Func returning the value that the input field should display</param>
+            <param name="setter">An Action that is invoked when a user finishes editing the text in the input field</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.InsertNumericInputField``1(System.Int32,System.String,System.Func{``0},System.Action{``0})">
+            <summary>Inserts an input field supporting any numeric type into the option list, at the specified position</summary>
+            <param name="position">The index of the option list at which the input field will be inserted</param>
+            <param name="nameText">Text to display next to the input field</param>
+            <param name="getter">A Func returning the value that the input field should display</param>
+            <param name="setter">An Action that is invoked when a user finishes editing the text in the input field</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.AppendNumericSlider``1(System.String,System.Func{``0},System.Action{``0},System.Single,System.Single)">
+            <summary>Appends a slider supporting any numeric type to the option list</summary>
+            <param name="nameText">Text to display next to the slider</param>
+            <param name="getter">A Func returning the value that the slider should display</param>
+            <param name="setter">An Action that is invoked when a user finishes editing the text in the slider</param>
+            <param name="minValue">The minimum value of the slider</param>
+            <param name="maxValue">The maximum value of the slider</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.PrependNumericSlider``1(System.String,System.Func{``0},System.Action{``0},System.Single,System.Single)">
+            <summary>Prepends a slider supporting any numeric type to the option list</summary>
+            <param name="nameText">Text to display next to the slider</param>
+            <param name="getter">A Func returning the value that the slider should display</param>
+            <param name="setter">An Action that is invoked when a user finishes editing the text in the slider</param>
+            <param name="minValue">The minimum value of the slider</param>
+            <param name="maxValue">The maximum value of the slider</param>
+        </member>
+        <member name="M:ModMenu.Api.OptionListContext.InsertNumericSlider``1(System.Int32,System.String,System.Func{``0},System.Action{``0},System.Single,System.Single)">
+            <summary>Inserts a slider supporting any numeric type into the option list</summary>
+            <param name="position">The index of the option list at which the slider will be inserted</param>
+            <param name="nameText">Text to display next to the slider</param>
+            <param name="getter">A Func returning the value that the slider should display</param>
+            <param name="setter">An Action that is invoked when a user finishes editing the text in the slider</param>
+            <param name="minValue">The minimum value of the slider</param>
+            <param name="maxValue">The maximum value of the slider</param>
+        </member>
+    </members>
+</doc>
