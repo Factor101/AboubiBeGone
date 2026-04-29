@@ -10,8 +10,6 @@ namespace AboubiBeGone
         static void Prefix(PlayerHealth __instance) => Plugin.DisableLocalRagdollSpawn(__instance);
     };
 
-
-
     [HarmonyPatch(typeof(PredictedProjectile), "HandleCollision")]
     class Patch_PredictedProjectile_NoBlood
     {
