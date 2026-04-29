@@ -24,8 +24,10 @@ namespace AboubiBeGone
     {
         public static Plugin Instance { get; private set; }
         private new static ManualLogSource Logger;
-        private static bool featureEnabled = true;
+        private static bool isRagdollDisabled = true;
+        private static bool isBloodDisabled = true;
         private static ConfigEntry<string> secret;
+
         public void Awake()
         {
             Instance = this;
@@ -34,10 +36,10 @@ namespace AboubiBeGone
 
 
             ModMenuCustomisation.RegisterContentBuilder(ModMenuSettingsBuilder);
-            ModMenuCustomisation.SetPluginDescription("Remove ragdoll spawn on death");
+            ModMenuCustomisation.SetPluginDescription("Remove bloodvfx and/or ragdoll spawn on death");
 
+            // doesnt work without this. dont ask, just barel
             secret = Config.Bind("barel", "load bearing barel", "barel", "barel");
-            //ModMenuCustomisation.HideEntry(secret);
 
             new Harmony(PluginInfo.guid).PatchAll();
         }
@@ -46,11 +48,7 @@ namespace AboubiBeGone
 
         public static void DisableLocalRagdollSpawn(PlayerHealth __instance)
         {
-            if (!featureEnabled) return;
-
-            _phSpawnedRagdoll(__instance) = true;
-            Logger.LogInfo("[+] AboubiBeGone: Disabled local ragdoll spawn for player " + __instance.gameObject.name);
-
+            if (!isRagdollDisabled) return;
             if (__instance.IsOwner)  // ensure death count and sound still function
             {
                 Logger.LogInfo("[+] AboubiBeGone: Detected local death (you suck), increasing death count and playing sound.");
@@ -62,14 +60,52 @@ namespace AboubiBeGone
                     UnityEngine.Random.Range(0.95f, 1.05f)
                 );
             }
+            else
+            {
+                _phSpawnedRagdoll(__instance) = true;
+                Logger.LogInfo("[+] AboubiBeGone: Disabled local ragdoll spawn for player " + __instance.gameObject.name);
+            }
+        }
+
+
+        private static AccessTools.FieldRef<PredictedProjectile, GameObject> _bloodVfx =
+            AccessTools.FieldRefAccess<PredictedProjectile, GameObject>("bloodVfx");
+        private static AccessTools.FieldRef<PredictedProjectile, GameObject> _headBloodVfx =
+            AccessTools.FieldRefAccess<PredictedProjectile, GameObject>("headBloodVfx");
+        private static AccessTools.FieldRef<PredictedProjectile, GameObject> _bloodSplatter =
+            AccessTools.FieldRefAccess<PredictedProjectile, GameObject>("bloodSplatter");
+
+        public static void Prefix_PredictedProjectile_NoBlood(PredictedProjectile __instance,
+            out GameObject __state_bloodVfx,
+            out GameObject __state_headBloodVfx,
+            out GameObject __state_bloodSplatter)
+        {
+            __state_bloodVfx = _bloodVfx(__instance);
+            __state_headBloodVfx = _headBloodVfx(__instance);
+            __state_bloodSplatter = _bloodSplatter(__instance);
+
+            _bloodVfx(__instance) = null;
+            _headBloodVfx(__instance) = null;
+            _bloodSplatter(__instance) = null;
+        }
+
+        public static void Postfix_PredictedProjectile_NoBlood(PredictedProjectile __instance,
+            GameObject __state_bloodVfx,
+            GameObject __state_headBloodVfx,
+            GameObject __state_bloodSplatter)
+        {
+            _bloodVfx(__instance) = __state_bloodVfx;
+            _headBloodVfx(__instance) = __state_headBloodVfx;
+            _bloodSplatter(__instance) = __state_bloodSplatter;
         }
 
         public static void ModMenuSettingsBuilder(OptionListContext ctx)
         {
             ctx.InsertHeader(13, "AboubiBeGone");
-            ctx.InsertTextBox(14, "Disables ragdoll spawns on player death. Made by catjpg with kestrel's ModMenu")
+            ctx.InsertTextBox(14, "Disables ragdoll spawns on player death and blood particle vfx. Made by catjpg with kestrel's ModMenu")
                 .GetComponent<LayoutElement>().preferredHeight = 128;
-            ctx.AppendCheckbox("Disable Ragdoll Spawn", () => featureEnabled, value => featureEnabled = value);
+            ctx.AppendCheckbox("Disable Ragdoll Spawn", () => isRagdollDisabled, value => isRagdollDisabled = value);
+            ctx.AppendCheckbox("Disable Blood Particle VFX", () => isBloodDisabled, value => isBloodDisabled = value);  
         }
     }
 }
