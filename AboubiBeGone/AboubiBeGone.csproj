@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all" />
+    <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.1" PrivateAssets="all" />
     <PackageReference Include="BepInEx.Core" Version="5.*" />
     <PackageReference Include="BepInEx.PluginInfoProps" Version="2.*" />
     <PackageReference Include="UnityEngine.Modules" Version="2021.3.16" IncludeAssets="compile" />
@@ -31,7 +32,6 @@
       <HintPath>..\..\..\..\AppData\Roaming\r2modmanPlus-local\STRAFTAT\profiles\Default\BepInEx\core\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>D:\SteamLibrary\steamapps\common\STRAFTAT\STRAFTAT_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx">
       <HintPath>..\..\..\..\AppData\Roaming\r2modmanPlus-local\STRAFTAT\profiles\Default\BepInEx\core\BepInEx.dll</HintPath>
@@ -41,6 +41,7 @@
     </Reference>
     <Reference Include="BepInEx.Preloader">
       <HintPath>..\..\..\..\AppData\Roaming\r2modmanPlus-local\STRAFTAT\profiles\Default\BepInEx\core\BepInEx.Preloader.dll</HintPath>
+    <Reference Include="Assembly-CSharp" Publicize="true">
     </Reference>
     <Reference Include="com.rlabrecque.steamworks.net">
       <HintPath>D:\SteamLibrary\steamapps\common\STRAFTAT\STRAFTAT_Data\Managed\com.rlabrecque.steamworks.net.dll</HintPath>
